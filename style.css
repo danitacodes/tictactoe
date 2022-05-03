@@ -14,11 +14,16 @@ body {
     background: #68A7AD;
 }
 
+footer {
+    bottom: 0;
+}
+
 .select-box, .game-board, .result-box {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
 }
 
 header {
@@ -27,13 +32,17 @@ header {
 
 /*Select Box CSS Style*/
 .select-box {
-    
     background: #E5CB9F;
     padding: 20px 25px 25px;
     border-radius: 5px;
     max-width: 330px;
     width: 100%;
-    /* display: none; */
+}
+
+.select-box.hide {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.9);
 }
 
 .select-box header {
@@ -84,7 +93,14 @@ header {
 
 /*Gameboard CSS Style*/
 .game-board {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.9);
+}
+.game-board.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .game-board .details{
@@ -110,6 +126,7 @@ header {
     text-align: center;
     position: relative;
     z-index: 5;
+    transition: all 0.3s ease;
 }
 
 .details span:first-child {
@@ -128,8 +145,20 @@ header {
     background: #68A7AD;
     border-radius: 5px;
     z-index: 2;
+    transition: all 0.3s ease;
 }
 
+.players.active span:first-child {
+    color: #68A7AD;
+}
+
+.players.active span:nth-child(2) {
+    color: #E5CB9F;
+}
+
+.players.active .slider {
+    left: 50%;
+}
 .game-board .play-area {
     margin-top: 20px;
 }
