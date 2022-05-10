@@ -19,12 +19,12 @@ window.onload = () => {
     selectMermaidBtn.onclick = () => {
         selectBox.classList.add("hide"); //hide the select box on mermaid player button click
         gameBoard.classList.add("show"); //show the gameboard on mermaid player button click
-        players.setAttribute("class", "players active"); //add three class names in players element
+        players.setAttribute("class", "players active player"); //add three class names in players element
     }
 }
 
 let playerunicornIcon = document.createElement("img");
-playerunicornIcon.src = "icons8-unicorn-50.png";
+playerunicornIcon.src = "Images\icons8-unicorn-50.png";
 
 let playermermaidIcon = document.createElement("img");
 playermermaidIcon.src = "Images\icons8-mermaid-24.png";
@@ -32,8 +32,8 @@ playermermaidIcon.src = "Images\icons8-mermaid-24.png";
 
 function clickedBox(element) {
     if(players.classList.contains("player")) {
-        element.innerHTML = `${playerunicornIcon}"/>`; //adding unicorn icon
+        element.innerHTML = playerunicornIcon;
     } else {
-        element.innerHTML = `<img = "${playermermaidIcon}"/>`//adding mermaid icon
+        element.innerHTML = "<img src=\"Images\icons8-mermaid-24.png\">"
     }
 }
