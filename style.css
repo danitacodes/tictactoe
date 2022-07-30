@@ -37,6 +37,10 @@ header {
     border-radius: 5px;
     max-width: 330px;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .select-box.hide {
@@ -45,14 +49,34 @@ header {
     transform: translate(-50%, -50%) scale(0.9);
 }
 
-.select-box header {
+.select-box h1 {
     font-size: 25px;
     font-weight: 500;
     padding-bottom: 10px;
-    border-bottom: 1px solid #ccc;
 }
 
-.select-box .title {
+img {
+    width: 50px;
+    height: 50px;
+    padding: 4px;
+}
+
+.start-btn {
+    width: 50%;
+    font-size: 18px;
+    background: #68A7AD;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 8px 0;
+    font-weight: 500;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+/* .select-box .title {
     font-size: 18px;
     font-weight: 500;
     margin: 20px 0;
@@ -89,7 +113,7 @@ header {
 
 .options button.playermermaid {
     margin-left: 5px;
-}
+} */
 
 /*Gameboard CSS Style*/
 .game-board {

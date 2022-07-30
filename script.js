@@ -24,16 +24,16 @@ window.onload = () => {
 }
 
 let playerunicornIcon = document.createElement("img");
-playerunicornIcon.src = "Images\icons8-unicorn-50.png";
+playerunicornIcon.src = "Images/icons8-unicorn-50.png";
 
 let playermermaidIcon = document.createElement("img");
-playermermaidIcon.src = "Images\icons8-mermaid-24.png";
+playermermaidIcon.src = "Images/icons8-mermaid-24.png";
 
 
 function clickedBox(element) {
     if(players.classList.contains("player")) {
-        element.innerHTML = playerunicornIcon;
+        element.appendChild(playerunicornIcon);
     } else {
-        element.innerHTML = "<img src=\"Images\icons8-mermaid-24.png\">"
+        element.innerHTML = playermermaidIcon;
     }
 }
