@@ -10,8 +10,8 @@
 </head>
 <body>
     <!--Selection Box-->
-    <div class="select-box">
-        <h1 class="text-light">Mermaid or Unicorn</h1>
+    <div class="select-box hide">
+        <h1>Mermaid or Unicorn</h1>
         <div class="profile">
             <div class="img">
                <img src="./Images/mermaid.png" class="id" data-id="x" alt="mermaid icon"> 
@@ -21,19 +21,10 @@
         
         <button class="start-btn" id="startBtn">Start Game</button>
     </div>
-    <!-- <div class="select-box">
-
 
     <!--Gameboard-->
-    <div class="game-board">
-        <div class="details">
-            <div class="players">
-                <span class="unicornturn">Unicorn's Turn</span>
-                <span class="mermaidturn">Mermaid's Turn</span>
-                <div class="slider"></div>
-            </div>
-        </div>
-        <div class="play-area">
+    <div class="game-board show">
+        <div class="play-area x" id="play-area">
             <section>
                 <span class="box1"></span>
                 <span class="box2"></span>

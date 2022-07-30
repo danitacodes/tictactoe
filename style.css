@@ -3,6 +3,12 @@
 /*font-family: 'Raleway', sans-serif;*/
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@200&family=Raleway:wght@200;500;700&display=swap');
 
+:root {
+    /*img*/
+    --mermaid: url('./Images/mermaid.png');
+    --unicorn: url('./Images/unicorn.png');
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -59,6 +65,12 @@ img {
     width: 50px;
     height: 50px;
     padding: 4px;
+    cursor: pointer;
+}
+
+img:hover {
+    background-color: #68A7AD;
+    border-radius: 2px;
 }
 
 .start-btn {
@@ -76,44 +88,6 @@ img {
     margin-top: 15px;
 }
 
-/* .select-box .title {
-    font-size: 18px;
-    font-weight: 500;
-    margin: 20px 0;
-    text-align: center;
-}
-
-.select-box .options {
-    display: flex;
-    width: 100%;
-}
-
-.options button {
-    width: 100%;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 8px 0;
-    border: none;
-    outline: none;
-    background: #68A7AD;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.options button:hover,
-.result-box .btn button:hover {
-    transform: scale(0.9);
-}
-
-.options button.playerunicorn {
-    margin-right: 5px;
-}
-
-.options button.playermermaid {
-    margin-left: 5px;
-} */
 
 /*Gameboard CSS Style*/
 .game-board {
@@ -127,68 +101,16 @@ img {
     transform: translate(-50%, -50%) scale(1);
 }
 
-.game-board .details{
-    background: #E5CB9F;
-    padding: 7px;
-    border-radius: 5px;
-}
-.game-board .details .players {
-    display: flex;
-    width: 100%;
-    position: relative;
-    justify-content: space-between;
-}
-
-.game-board .details span {
-    width: 100%;
-    color: #68A7AD;
-    border-radius: 5px;
-    padding: 7px 0;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: default;
-    text-align: center;
-    position: relative;
-    z-index: 5;
-    transition: all 0.3s ease;
-}
-
-.details span:first-child {
-    color: #E5CB9F;
-}
-/* .details span.active {
-    color: #E5CB9F;
-} */
-
-.details .slider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 50%;
-    background: #68A7AD;
-    border-radius: 5px;
-    z-index: 2;
-    transition: all 0.3s ease;
-}
-
-.players.active span:first-child {
-    color: #68A7AD;
-}
-
-.players.active span:nth-child(2) {
-    color: #E5CB9F;
-}
-
-.players.active .slider {
-    left: 50%;
-}
 .game-board .play-area {
     margin-top: 20px;
 }
 
 .game-board section {
     display: flex;
+}
+
+.game-board .play-area.x .box1:hover {
+    background: var(--mermaid) no-repeat;
 }
 
 .game-board section span {
