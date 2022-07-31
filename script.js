@@ -1,39 +1,69 @@
-//Select all required elements
-const selectBox = document.querySelector(".select-box"),
-selectUnicornBtn = selectBox.querySelector(".playerunicorn"),
-selectMermaidBtn = selectBox.querySelector(".playermermaid"),
-gameBoard = document.querySelector(".game-board"),
-allBox = document.querySelectorAll("section span"),
-players = document.querySelector(".players");
+import { GAME } from "./module/variables.js";
+import { Profile, setHover, markedCell, swapUsers, endGame, isDraw } from "./module/helper.js";
+import { checkWin, WIN_COMBOS } from "./module/win.js";
 
-window.onload = () => {
-    //add onclick attribute in all available section spans
-    for (let i = 0; i < allBox.length; i++) {
-        allBox[i].setAttribute("onclick", "clickedBox(this)");
-    }
-    //once window loads
-    selectUnicornBtn.onclick = () => {
-        selectBox.classList.add("hide"); //hide the select box on unicorn player button click
-        gameBoard.classList.add("show"); //show the gameboard on unicorn player button click
-    }
-    selectMermaidBtn.onclick = () => {
-        selectBox.classList.add("hide"); //hide the select box on mermaid player button click
-        gameBoard.classList.add("show"); //show the gameboard on mermaid player button click
-        players.setAttribute("class", "players active player"); //add three class names in players element
-    }
+//Game Buttons
+GAME.startBtn.addEventListener("click", startGame);
+GAME.restartBtn.addEventListener('click', startGame);
+GAME.drawBtn.addEventListener('click', startGame);
+
+Profile();
+
+/*Start Game*/
+function startGame() {
+  setHover();
+
+  //iterate cells and create click event
+  GAME.blockElements.forEach((cell) => {
+    cell.classList.remove(GAME.X_CLASS);
+    cell.classList.remove(GAME.Y_CLASS);
+    cell.classList.remove("win");
+    cell.removeEventListener('click', handleClick)
+    
+  GAME.boardElement.classList.remove('hide')
+    
+    cell.addEventListener("click", handleClick, { once: true });
+  });
+
+  GAME.startWindow.classList.add("hide");
+  GAME.winEl.classList.remove('show');
+  GAME.drawEl.classList.remove('show')
+  GAME.winnerImg.children.length ? GAME.winnerImg.removeChild(GAME.winner) : null;
 }
 
-let playerunicornIcon = document.createElement("img");
-playerunicornIcon.src = "Images/icons8-unicorn-50.png";
+//handleClick Function
+function handleClick(e) {
+  const cell = e.target;
+  const currentClass = GAME.turn ? GAME.X_CLASS : GAME.Y_CLASS;
+  markedCell(cell, currentClass);
 
-let playermermaidIcon = document.createElement("img");
-playermermaidIcon.src = "Images/icons8-mermaid-24.png";
+  //check winner
+  let flag = checkWin(currentClass, GAME.blockElements).filter((win, index) => {
+    if(win) {
+    
+    //indicate winner
+    WIN_COMBOS[index].map(i => {
+        GAME.blockElements[i].classList.add("win")
+    })
 
-
-function clickedBox(element) {
-    if(players.classList.contains("player")) {
-        element.appendChild(playerunicornIcon);
-    } else {
-        element.innerHTML = playermermaidIcon;
+    //set winner
+    GAME.winner = GAME.blockElements[WIN_COMBOS[index][0]].cloneNode(true);
+    return win !== false;
     }
+  });
+
+  //Win or Draw
+  if (flag.length) {
+    endGame(false, GAME.winEl, GAME.drawEl)
+    GAME.winnerImg.append(GAME.winner);
+    GAME.boardElement.classList.add('hide')
+    
+  } else if(isDraw(flag)) {
+    endGame(true, GAME.winEl, GAME.drawEl)
+    GAME.boardElement.classList.add('hide')
+  }
+
+
+  GAME.turn = swapUsers(GAME.turn);
+  setHover();
 }

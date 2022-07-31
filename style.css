@@ -4,12 +4,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@200&family=Raleway:wght@200;500;700&display=swap');
 
 :root {
+    --cell-size: 100px;
+
     /*img*/
-    --mermaid: url('./Images/mermaid.png');
-    --unicorn: url('./Images/unicorn.png');
+    --mermaid-icon: url('./Images/mermaid.png');
+    --unicorn-icon: url('./Images/unicorn.png');
 }
 
-*{
+* > * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -20,45 +22,38 @@ body {
     background: #68A7AD;
 }
 
-footer {
-    bottom: 0;
-}
-
-.select-box, .game-board, .result-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: all 0.3s ease;
-}
-
-header {
-    text-align: center;
-}
-
-/*Select Box CSS Style*/
-.select-box {
-    background: #E5CB9F;
-    padding: 20px 25px 25px;
-    border-radius: 5px;
-    max-width: 330px;
-    width: 100%;
+.game-board {
+    height: 100vh;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
 
-.select-box.hide {
-    opacity: 0;
-    pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.9);
+.game-board.hide, .winner-msg.hide, .draw-msg.hide, .start-game.hide {
+    display: none;
 }
 
-.select-box h1 {
+
+/*Start Game CSS Style*/
+.start-game {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: #68A7AD;
+}
+
+.start-game h1 {
     font-size: 25px;
     font-weight: 500;
     padding-bottom: 10px;
+    color: #333;
+}
+
+.start-game.hide {
+    display: none;
 }
 
 img {
@@ -73,96 +68,105 @@ img:hover {
     border-radius: 2px;
 }
 
-.start-btn {
-    width: 50%;
-    font-size: 18px;
-    background: #68A7AD;
-    border-radius: 5px;
+.primary-btn {
     border: none;
+    background: #E5CB9F;
+    border-radius: 10px;
     color: white;
-    padding: 8px 0;
+    padding: 10px 20px;
+    margin-top: 2em;
+    font-size: 18px;
     font-weight: 500;
     cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    margin-top: 15px;
 }
 
 
 /*Gameboard CSS Style*/
-.game-board {
-    opacity: 0;
-    pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.9);
-}
-.game-board.show {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1);
+.play-area {
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    background-color: #68A7AD;
+    row-gap: 3px;
+    column-gap: 3px;
 }
 
-.game-board .play-area {
-    margin-top: 20px;
-}
-
-.game-board section {
+.block {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background-color: #E5CB9F;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 4px;
+    
 }
 
-.game-board .play-area.x .box1:hover {
-    background: var(--mermaid) no-repeat;
+.block.x, .block.y {
+    cursor: not-allowed;
 }
 
-.game-board section span {
-    display: block;
-    margin: 2px;
-    height: 80px;
-    width: 80px;
-    background: #E5CB9F;
-    border-radius: 5px;
-    font-size: 40px;
-    text-align: center;
-    line-height: 80px;
-    color: #68A7AD;
+.play-area.x .block:not(.x):not(.y):hover {
+    background: var(--mermaid-icon);
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.4;
 }
 
-/*Results CSS*/
-.result-box {
-    background: #E5CB9F;
-    padding: 20px;
-    border-radius: 5px;
-    max-width: 350px;
-    width: 100%;
+.play-area.y .block:not(.y):not(.x):hover {
+    background: var(--unicorn-icon);
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.4;
+}
+
+/*x is equal to mermaid*/
+/*y is equal to unicorn*/
+
+.block.x {
+    background: var(--mermaid-icon);
+    background-size: cover;
+    background-repeat: no-repeat
+}
+
+.block.y {
+    background: var(--unicorn-icon);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/*Draw & Winner CSS*/
+.start-game, .draw-msg, .winner-msg {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.draw-msg, .winner-msg {
     display: none;
 }
 
-.result-box .won {
-    font-size: 25px;
-    font-weight: 500;
+.draw-msg.show, .winner-msg.show {
     display: flex;
-    justify-content: center;
 }
 
-.result-box .won p {
-    font-weight: 700;
-    margin: 0 30px;
+.start-game .profile .img > img.selected {
+    background-color: #E5CB9F;
+    border: 2px solid #68A7AD;
+    border-radius: 20px;
 }
 
-.result-box .btn {
-    display: flex;
+.win {
+    background-color: black !important;
     margin-top: 20px;
-    justify-content: center;
 }
 
-.result-box .btn button {
-    font-size: 18px;
-    font-weight: 500;
-    padding: 8px 20px;
-    border: none;
-    outline: none;
-    background: #68A7AD;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.play-area.hide{
+    display: none;
 }

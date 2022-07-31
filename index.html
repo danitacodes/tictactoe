@@ -10,7 +10,7 @@
 </head>
 <body>
     <!--Selection Box-->
-    <div class="select-box hide">
+    <div class="start-game">
         <h1>Mermaid or Unicorn</h1>
         <div class="profile">
             <div class="img">
@@ -19,40 +19,41 @@
             </div>
         </div>
         
-        <button class="start-btn" id="startBtn">Start Game</button>
+        <button class="primary-btn" id="startBtn">Start Game</button>
     </div>
 
     <!--Gameboard-->
-    <div class="game-board show">
-        <div class="play-area x" id="play-area">
-            <section>
-                <span class="box1"></span>
-                <span class="box2"></span>
-                <span class="box3"></span>
-            </section>
-            <section>
-                <span class="box4"></span>
-                <span class="box5"></span>
-                <span class="box6"></span>
-            </section>
-            <section>
-                <span class="box7"></span>
-                <span class="box8"></span>
-                <span class="box9"></span>
-            </section>
+    <div class="game-board">
+        <div class="play-area" id="play-area">
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+            <div class="block" data-cell></div>
+
         </div>
     </div>
    
-    <!--Results-->
-    <div class="result-box">
-        <div class="won"><p>Unicorn</p>won!</div>
-        <div class="btn">
-            <button>Replay</button>
+    <!--Draw Screen-->
+    <div class="draw-msg">
+        <div class="draw">
+            <h1>Draw</h1>
         </div>
+        <button id="drawBtn" class="primary-btn">Play Again</button>
     </div>
 
-
+    <!--Winner Screen-->
+    <div class="winner-msg">
+        <div class="winner">
+            <h1>Winner</h1>
+            <button id="restartBtn" class="primary-btn">Restart</button>
+        </div>
+    </div>
    
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
